@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './nav.scss';
+import styles from './nav.module.scss';
 
 import icon from './icon.svg';
 

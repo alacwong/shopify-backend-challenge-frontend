@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBar.module.scss';
+import styles from './search.module.scss';
 
 import logo from './logo.svg';
 import mic from './mic.svg';
@@ -16,9 +16,8 @@ export default function Search() {
             <input
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
-                readOnly
                 className={styles.searchBar}
-                value={state.currentInput}
+                value={'Thanks for your code richard <3'}
             />
             <img src={mic} className={styles.mic} alt="mic" />
         </div>

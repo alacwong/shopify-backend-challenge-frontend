@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import FadeIn from 'react-fade-in';
-import styles from 'home.scss';
+import styles from './home.module.scss';
 
 import Search from '../components/search/search';
 import Nav from '../components/nav/nav';
