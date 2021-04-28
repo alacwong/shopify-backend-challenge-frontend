@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import styles from './search.module.scss';
 
 import logo from './logo.svg';
@@ -6,6 +6,13 @@ import mic from './mic.svg';
 
 
 export default function Search() {
+
+    const [term, setTerm] = useState('');
+
+    const handleChange = (e) => {
+        setTerm(e.target.value);
+    }
+
     return (
         <div
             className={
@@ -17,7 +24,8 @@ export default function Search() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 className={styles.searchBar}
-                value={'Thanks for your code richard <3'}
+                value={term}
+                onChange={handleChange}
             />
             <img src={mic} className={styles.mic} alt="mic" />
         </div>
