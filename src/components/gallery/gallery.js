@@ -5,7 +5,6 @@ import FadeIn from 'react-fade-in';
 
 export default function PhotoGallery(props) {
 
-    console.log(props)
     const photos = props.photos;
 
     return (
