@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styles from '../search/search.module.scss';
 
 import {config} from "../../config";
