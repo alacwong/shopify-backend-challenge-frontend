@@ -5,6 +5,7 @@ import logo from '../../pages/google.png';
 import FadeIn from "react-fade-in";
 import dots from './dots.svg';
 import PhotoGallery from "../../components/gallery/gallery";
+import axios from "axios";
 
 export default function Image() {
 
@@ -12,6 +13,9 @@ export default function Image() {
     const [page, setPage] = useState(0);
     const api = 'http://127.0.0.1:5000/images/search/'
     const [term, setTerm] = useState('');
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     const prev = () => {
         if (page > 0) {
             setPage(page - 1);
@@ -23,6 +27,7 @@ export default function Image() {
     }
 
     const fetchData = () => {
+        setLoading(true);
         fetch(`${api}?pokemon=${term}&page=${page}`).then(res => res.json()).then(
             data => {
                 if ( data.images) {
@@ -36,13 +41,41 @@ export default function Image() {
                 } else {
                     setPhotos([]);
                 }
+
+                setLoading(false);
             }
         );
     }
 
+    const fetchDataReverse = () => {
+        const data = new FormData();
+        data.append('file', file);
+        let url = `http://127.0.0.1:5000/images/reverse_search/?page=${page}`;
+        setLoading(true);
+        axios.post(url, data, {})
+            .then(res => {
+                if (res.data.images.length > 0) {
+                    setPhotos(res.data.images.map(image => {
+                        return {
+                            src: image.url,
+                            width: 4,
+                            height: 3
+                        }
+                    }))
+                } else {
+                    setPhotos([]);
+                }
+                setLoading(false);
+            });
+    }
+
     useEffect(
         () => {
-            fetchData()
+            if (file === null) {
+                fetchData();
+            } else {
+                fetchDataReverse();
+            }
         }, [page]
     )
 
@@ -58,7 +91,13 @@ export default function Image() {
                         </FadeIn>
                         <FadeIn delay={120}>
                             <div className={styles.searchContainer}>
-                                <SearchPageBar setPhotos={setPhotos} term={term} setTerm={setTerm}/>
+                                <SearchPageBar
+                                    setPhotos={setPhotos}
+                                    term={term}
+                                    setTerm={setTerm}
+                                    setFile={setFile}
+                                    setLoading={setLoading}
+                                />
                             </div>
                         </FadeIn>
                         <div className={styles.right}>
@@ -82,7 +121,7 @@ export default function Image() {
                     </div>
                 </FadeIn>
             </div>
-            <PhotoGallery photos={photos}/>
+            <PhotoGallery photos={photos} loading={loading}/>
         </div>
     );
 };
