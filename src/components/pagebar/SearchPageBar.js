@@ -2,14 +2,14 @@
 import React, {useRef, useState} from 'react';
 import styles from '../search/search.module.scss';
 
-import logo from '../search/logo.svg';
+import {config} from "../../config";
 import mic from '../search/mic.svg';
 import camera from '../search/camera.png'
 import axios from "axios";
 
 export default function SearchBar(props) {
 
-    const api = 'http://127.0.0.1:5000/images/search/'
+    const api = `${config.apiBaseUrl}images/search/`;
 
     const handleChange = (e) => {
         props.setTerm(e.target.value);
@@ -54,7 +54,7 @@ export default function SearchBar(props) {
 
         const data = new FormData();
         data.append('file', file);
-        let url = "http://127.0.0.1:5000/images/reverse_search/";
+        let url = `${config.apiBaseUrl}images/reverse_search/`;
         props.setFile(file);
         props.setLoading(true);
         axios.post(url, data, {})

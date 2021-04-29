@@ -6,12 +6,13 @@ import FadeIn from "react-fade-in";
 import dots from './dots.svg';
 import PhotoGallery from "../../components/gallery/gallery";
 import axios from "axios";
+import {config} from '../../config'
 
 export default function Image() {
 
     const [photos, setPhotos] = useState([]);
     const [page, setPage] = useState(0);
-    const api = 'http://127.0.0.1:5000/images/search/'
+    const api = `${config.apiBaseUrl}images/search/`;
     const [term, setTerm] = useState('');
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ export default function Image() {
     const fetchDataReverse = () => {
         const data = new FormData();
         data.append('file', file);
-        let url = `http://127.0.0.1:5000/images/reverse_search/?page=${page}`;
+        let url = `${config.apiBaseUrl}images/reverse_search/?page=${page}`;
         setLoading(true);
         axios.post(url, data, {})
             .then(res => {
