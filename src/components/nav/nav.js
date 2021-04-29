@@ -7,14 +7,14 @@ export default function Nav() {
     return (
         <div className={styles.NavBar}>
             <div className={styles.Left}>
-                <a>About</a>
-                <a>Store</a>
+                <a href={'/#'}>About</a>
+                <a href={'/#'}>Store</a>
             </div>
             <div className={styles.Right}>
-                <a>Gmail</a>
-                <a>Images</a>
+                <a href={'/#'} >Gmail</a>
+                <a href={'/#'} >Images</a>
                 <img src={icon} alt="icon" className={styles.icon} />
-                <a className={styles.button}>Sign in</a>
+                <a href={'/#'} className={styles.button}>Sign in</a>
             </div>
         </div>
     );

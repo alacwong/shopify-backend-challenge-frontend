@@ -11,7 +11,7 @@ export default function PhotoGallery(props) {
     return (
         <FadeIn delay={500}>
             {
-                photos.length > 0 ? !loading && <Gallery
+                photos && photos.length > 0 ? !loading && <Gallery
                     photos={photos}
                     direction="column"
                     columns={window.innerWidth < 700 ? 1 : 3}

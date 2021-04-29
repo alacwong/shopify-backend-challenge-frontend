@@ -1,16 +1,20 @@
-import React, { useState} from 'react';
+import React from 'react';
 import styles from './search.module.scss';
 
 import logo from './logo.svg';
 import mic from './mic.svg';
 
 
-export default function Search() {
-
-    const [term, setTerm] = useState('');
+export default function Search(props) {
 
     const handleChange = (e) => {
-        setTerm(e.target.value);
+        props.setTerm(e.target.value);
+    }
+
+    const onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            props.setShowHome(false);
+        }
     }
 
     return (
@@ -24,7 +28,8 @@ export default function Search() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 className={styles.searchBar}
-                value={term}
+                value={props.term}
+                onKeyPress={onKeyPress}
                 onChange={handleChange}
             />
             <img src={mic} className={styles.mic} alt="mic" />

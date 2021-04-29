@@ -8,7 +8,7 @@ import PhotoGallery from "../../components/gallery/gallery";
 import axios from "axios";
 import {config} from '../../config'
 
-export default function Image() {
+export default function Image(props) {
 
     const [photos, setPhotos] = useState([]);
     const [page, setPage] = useState(0);
@@ -27,9 +27,9 @@ export default function Image() {
         setPage(page + 1);
     }
 
-    const fetchData = () => {
+    const fetchData = (pokemon) => {
         setLoading(true);
-        fetch(`${api}?pokemon=${term}&page=${page}`).then(res => res.json()).then(
+        fetch(`${api}?pokemon=${pokemon}&page=${page}`).then(res => res.json()).then(
             data => {
                 if ( data.images) {
                     setPhotos(data.images.map(image => {
@@ -73,12 +73,22 @@ export default function Image() {
     useEffect(
         () => {
             if (file === null) {
-                fetchData();
+                fetchData(term);
             } else {
                 fetchDataReverse();
             }
         }, [page] // eslint-disable-line react-hooks/exhaustive-deps
-    )
+    );
+
+    useEffect(
+        () => {
+            setTerm(props.term);
+            fetchData(props.term);
+        }, [] // eslint-disable-line react-hooks/exhaustive-deps
+    );
+
+
+
 
     return (
         <div>

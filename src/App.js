@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import Image from "./pages/images/images";
+import Home from "./pages/home";
 
 function App() {
+
   return (
-    <Image/>
+    <Home/>
   );
 }
 
