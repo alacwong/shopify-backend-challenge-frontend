@@ -13,6 +13,12 @@ export default function Home () {
     const [term, setTerm] = useState('');
     const [showHome, setShowHome] = useState(true);
 
+    const lucky = () => {
+        let random =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        setTerm(random);
+        setShowHome(false);
+    }
+
     return (
         showHome ?
         <div className={styles.main}>
@@ -30,9 +36,9 @@ export default function Home () {
                 </div>
                 <div className={styles.ButtonContainer}>
                     <div>
-                        <button className={styles.Button}>Google Search</button>
+                        <button className={styles.Button} onClick={() => setShowHome(false)}>Google Search</button>
                     </div>
-                    <button className={styles.Button}>I'm feeling lucky</button>
+                    <button className={styles.Button}  onClick={lucky}>I'm feeling lucky</button>
                 </div>
                 <p>
                     Google offered in: <a>Français</a>
