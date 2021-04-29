@@ -77,7 +77,7 @@ export default function Image() {
             } else {
                 fetchDataReverse();
             }
-        }, [page]
+        }, [page] // eslint-disable-line react-hooks/exhaustive-deps
     )
 
     return (
