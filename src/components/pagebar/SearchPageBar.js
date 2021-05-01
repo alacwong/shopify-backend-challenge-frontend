@@ -51,6 +51,7 @@ export default function SearchBar(props) {
         event.stopPropagation();
         event.preventDefault();
         const file = event.target.files[0];
+        event.target.value = null;
 
         const data = new FormData();
         data.append('file', file);
